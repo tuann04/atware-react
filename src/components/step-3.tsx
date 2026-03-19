@@ -32,7 +32,11 @@ const Step3: React.FC<Step3Props> = ({
 
   const handleUpdateDish = (index: number, field: string, value: any) => {
     for (const dish of formData.dishes) {
-      if (field === "name" && dish.name === value && formData.dishes.indexOf(dish) !== index) {
+      if (
+        field === "name" &&
+        dish.name === value &&
+        formData.dishes.indexOf(dish) !== index
+      ) {
         alert("This dish is already selected. Please choose another one.");
         return;
       }
@@ -147,7 +151,6 @@ const Step3: React.FC<Step3Props> = ({
             <div>
               <p style={{ fontWeight: "bold" }}>Please enter no. of servings</p>
               <input
-                type="number"
                 value={item.servings}
                 onChange={(e) =>
                   handleUpdateDish(
@@ -160,6 +163,7 @@ const Step3: React.FC<Step3Props> = ({
                   width: "80px",
                   padding: "8px",
                   border: "2px solid black",
+                  color: "black",
                 }}
               />
             </div>

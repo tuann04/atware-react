@@ -55,15 +55,18 @@ const Step1: React.FC<Step1Props> = ({ formData, updateData, onNext }) => {
 
       <div>
         <p>Please Enter Number of people</p>
+
         <input
-          type="number"
           value={formData.people}
           onChange={(e) =>
             updateData({ people: parseInt(e.target.value) || 1 })
           }
-          min={1}
-          max={10}
-          style={{ width: "140px", padding: "5px", border: "2px solid black" }}
+          style={{
+            width: "140px",
+            padding: "5px",
+            border: "2px solid black",
+            color: "black",
+          }}
         />
       </div>
 
