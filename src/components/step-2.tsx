@@ -86,7 +86,14 @@ const Step2: React.FC<Step2Props> = ({
         </button>
 
         <button
-          onClick={onNext}
+          onClick={() => {
+            if (!formData.restaurant) {
+              alert("Please select a restaurant");
+              return;
+            }
+            onNext();
+          }}
+
           style={{
             padding: "5px 20px",
             backgroundColor: "white",

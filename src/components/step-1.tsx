@@ -75,7 +75,13 @@ const Step1: React.FC<Step1Props> = ({ formData, updateData, onNext }) => {
         }}
       >
         <button
-          onClick={onNext}
+          onClick={() => {
+            if (!formData.meal) {
+              alert("Please select a meal");
+              return;
+            }
+            onNext();
+          }}
           style={{
             padding: "5px 20px",
             backgroundColor: "white",
