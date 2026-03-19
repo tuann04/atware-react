@@ -7,8 +7,8 @@ interface Dish {
 }
 
 interface Step3Props {
-  formData: { dishes: Dish[] };
-  updateData: (data: { dishes: Dish[] }) => void;
+  formData: { dishes: Dish[]; people: number };
+  updateData: (data: { dishes: Dish[]; people: number }) => void;
   onNext: () => void;
   onBack: () => void;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -27,7 +27,7 @@ const Step3: React.FC<Step3Props> = ({
       ...formData.dishes,
       { id: Date.now(), name: "", servings: 1 },
     ];
-    updateData({ dishes: newDishes });
+    updateData({ ...formData, dishes: newDishes });
   };
 
   const handleUpdateDish = (index: number, field: string, value: any) => {
@@ -40,7 +40,7 @@ const Step3: React.FC<Step3Props> = ({
 
     const updated = [...formData.dishes];
     updated[index] = { ...updated[index], [field]: value };
-    updateData({ dishes: updated });
+    updateData({ ...formData, dishes: updated });
   };
 
   const validation = () => {
@@ -63,14 +63,23 @@ const Step3: React.FC<Step3Props> = ({
       }
     }
 
+    const totalServings = formData.dishes.reduce(
+      (sum, dish) => sum + dish.servings,
+      0,
+    );
+
+    if (totalServings < formData.people) {
+      alert("Total servings are less than the number of people.");
+      return false;
+    }
+
     return true;
-  }
+  };
 
   const handleNext = () => {
     if (!validation()) return;
     onNext();
-  }
-
+  };
 
   return (
     <div

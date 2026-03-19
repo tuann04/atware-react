@@ -93,7 +93,6 @@ const Step2: React.FC<Step2Props> = ({
             }
             onNext();
           }}
-
           style={{
             padding: "5px 20px",
             backgroundColor: "white",
