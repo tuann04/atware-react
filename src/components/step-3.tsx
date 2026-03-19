@@ -35,6 +35,35 @@ const Step3: React.FC<Step3Props> = ({
     updateData({ dishes: updated });
   };
 
+  const validation = () => {
+    if (formData.dishes.length === 0) {
+      alert("Please add at least one dish.");
+      return false;
+    }
+    for (const dish of formData.dishes) {
+      if (!dish.name) {
+        alert("Please select a dish.");
+        return false;
+      }
+      if (dish.servings <= 0) {
+        alert("Servings must be at least 1.");
+        return false;
+      }
+      if (dish.servings > 10) {
+        alert("Servings cannot exceed 10.");
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  const handleNext = () => {
+    if (!validation()) return;
+    onNext();
+  }
+
+
   return (
     <div
       style={{
@@ -149,7 +178,7 @@ const Step3: React.FC<Step3Props> = ({
           Previous
         </button>
         <button
-          onClick={onNext}
+          onClick={handleNext}
           style={{
             padding: "8px 25px",
             border: "2px solid black",
