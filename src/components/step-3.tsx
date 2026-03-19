@@ -11,6 +11,7 @@ interface Step3Props {
   updateData: (data: { dishes: Dish[] }) => void;
   onNext: () => void;
   onBack: () => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   availableDishes: any[];
 }
 
@@ -30,6 +31,13 @@ const Step3: React.FC<Step3Props> = ({
   };
 
   const handleUpdateDish = (index: number, field: string, value: any) => {
+    for (const dish of formData.dishes) {
+      if (field === "name" && dish.name === value && formData.dishes.indexOf(dish) !== index) {
+        alert("This dish is already selected. Please choose another one.");
+        return;
+      }
+    }
+
     const updated = [...formData.dishes];
     updated[index] = { ...updated[index], [field]: value };
     updateData({ dishes: updated });
