@@ -6,13 +6,19 @@ interface Dish {
   servings: number;
 }
 
+interface AvailableDish {
+  id: number;
+  name: string;
+  restaurant: string;
+  availableMeals: string[];
+}
+
 interface Step3Props {
   formData: { dishes: Dish[]; people: number };
   updateData: (data: { dishes: Dish[]; people: number }) => void;
   onNext: () => void;
   onBack: () => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  availableDishes: any[];
+  availableDishes: AvailableDish[];
 }
 
 const Step3: React.FC<Step3Props> = ({
@@ -30,7 +36,7 @@ const Step3: React.FC<Step3Props> = ({
     updateData({ ...formData, dishes: newDishes });
   };
 
-  const handleUpdateDish = (index: number, field: string, value: any) => {
+  const handleUpdateDish = (index: number, field: string, value: string) => {
     for (const dish of formData.dishes) {
       if (
         field === "name" &&
@@ -156,7 +162,7 @@ const Step3: React.FC<Step3Props> = ({
                   handleUpdateDish(
                     index,
                     "servings",
-                    parseInt(e.target.value) || 1,
+                    e.target.value || "1",
                   )
                 }
                 style={{
