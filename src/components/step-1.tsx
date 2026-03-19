@@ -53,7 +53,7 @@ const Step1: React.FC<Step1Props> = ({ formData, updateData, onNext }) => {
         </select>
       </div>
 
-      <div>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
         <p>Please Enter Number of people</p>
 
         <input
