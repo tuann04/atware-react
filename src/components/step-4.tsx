@@ -10,6 +10,36 @@ interface Step4Props {
   onBack: () => void;
 }
 
+const displayFormData = (formData: Step4Props["formData"]) => {
+  return (
+    <div style={{ marginTop: "20px" }}>
+      <p>
+        <strong>Meal:</strong> {formData.meal}
+      </p>
+      <p>
+        <strong>Number of People:</strong> {formData.people}
+      </p>
+      <p>
+        <strong>Restaurant:</strong> {formData.restaurant}
+      </p>
+      <div style={{ marginTop: "10px" }}>
+        <strong>Dishes:</strong>
+        {formData.dishes.length > 0 ? (
+          <ul style={{ marginLeft: "20px", marginTop: "5px" }}>
+            {formData.dishes.map((dish, index) => (
+              <li key={index}>
+                {dish.name} - Servings: {dish.servings}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p style={{ marginLeft: "20px", marginTop: "5px" }}>No dishes added.</p>
+        )}
+      </div>
+    </div>
+  );
+};
+
 const Step4: React.FC<Step4Props> = ({ formData, onBack }) => {
   const handleSubmit = () => {
     console.log("Final Submission Data:", formData);
@@ -64,7 +94,8 @@ const Step4: React.FC<Step4Props> = ({ formData, onBack }) => {
             overflowX: "auto",
           }}
         >
-          {JSON.stringify(formData, null, 2)}
+          {/* {JSON.stringify(formData, null, 2)} */}
+          {displayFormData(formData)}
         </pre>
       </div>
 
